@@ -38,7 +38,7 @@
       "position": [640, 300],
       "parameters": {
         "mode": "runOnceForAllItems",
-        "jsCode": "const { pillar, topic } = $input.first().json;\n\nconst pillarInstructions = {\n  education: `Write an educational LinkedIn post teaching Kenyan founders and SME owners about: \"${topic}\". Make it practical and specific. Give them one actionable insight they can use this week.`,\n  pain: `Write a LinkedIn post about the pain of: \"${topic}\". Make founders feel deeply seen. Mirror their frustration back to them. Do not offer a solution yet — just make them nod their head in recognition.`,\n  reframe: `Write a LinkedIn post that challenges this common belief: \"${topic}\". Flip the narrative. Replace the old belief with a systems-first mindset. Be direct and confident.`\n};\n\nconst systemPrompt = `You are a LinkedIn content writer for TechsCrafts, a digital systems consultancy based in Nairobi, Kenya founded by Dennis Bundi Kimathi.\\n\\nBrand voice: Direct, confident, no-fluff, founder-to-founder. You speak to Kenyan SME owners and startup founders who are working hard but lack operational visibility.\\n\\nCore message: \"You are not failing because you are not working hard enough. You are failing because your business is running on guesswork instead of systems.\"\\n\\nRules:\\n- 150 to 300 words\\n- No hashtag spam (max 3 relevant hashtags at the end)\\n- End every post with a soft CTA: invite them to book a free business operations audit at TechsCrafts\\n- Write in first person as Dennis Bundi\\n- No corporate jargon, no fluff\\n- Nairobi-grounded — reference the Kenyan business context naturally\\n- Short punchy paragraphs, not walls of text\\n- Use line breaks for readability`;\n\nconst userInstruction = pillarInstructions[pillar];\n\nreturn [{ json: { systemPrompt, userInstruction, pillar, topic } }];"
+        "jsCode": "const { pillar, topic } = $input.first().json;\n\nconst pillarInstructions = {\n  education: `Write an educational LinkedIn post teaching Kenyan founders and SME owners about: \"${topic}\". Make it practical and specific. Give them one actionable insight they can use this week.`,\n  pain: `Write a LinkedIn post about the pain of: \"${topic}\". Make founders feel deeply seen. Mirror their frustration back to them. Do not offer a solution yet — just make them nod their head in recognition.`,\n  reframe: `Write a LinkedIn post that challenges this common belief: \"${topic}\". Flip the narrative. Replace the old belief with a systems-first mindset. Be direct and confident.`\n};\n\nconst systemPrompt = `You are a LinkedIn content writer for TechsCrafts, a digital systems consultancy based in Nairobi, Kenya founded by Dennis Bundi Kimathi.\\n\\nBrand voice: Direct, confident, no-fluff, founder-to-founder. You speak to Kenyan SME owners and startup founders who are working hard but lack operational visibility.\\n\\nCore message: \"You are not failing because you are not working hard enough. You are failing because your business is running on guesswork instead of systems.\"\\n\\nRules:\\n- 150 to 300 words\\n- No hashtag spam (max 3 relevant hashtags at the end)\\n- End every post with a soft CTA: invite them to book a free business operations audit at TechsCrafts\\n- Write in first person as Dennis Bundi\\n- No corporate jargon, no fluff\\n- Nairobi-grounded — reference the Kenyan business context naturally\\n- Short punchy paragraphs, not walls of text\\n- Use line breaks for readability`;\n\nconst userInstruction = pillarInstructions[pillar];\n\nconst imagePrompt = `Professional LinkedIn post image for a ${pillar} post about: ${topic}. Dark background (#0a0a0a), bold green accent color (#00cc44). Abstract modern business visual — data, systems, growth. No text, no people, no faces. Clean minimalist style. 16:9 landscape format.`;\n\nreturn [{ json: { systemPrompt, userInstruction, pillar, topic, imagePrompt } }];"
       }
     },
     {
@@ -72,44 +72,42 @@
     },
     {
       "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
-      "name": "List Pillar Images",
+      "name": "Generate Post Image",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [1040, 300],
       "parameters": {
-        "method": "GET",
-        "url": "=https://www.googleapis.com/drive/v3/files?q='FOLDER_ID_PLACEHOLDER'+in+parents+and+name+contains+'{{ $('Select Content Pillar').first().json.pillar }}'&fields=files(id,name)",
-        "authentication": "oAuth2",
+        "method": "POST",
+        "url": "https://api.openai.com/v1/images/generations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"model\": \"dall-e-3\",\n  \"prompt\": \"{{ $('Build Claude Prompt').first().json.imagePrompt }}\",\n  \"n\": 1,\n  \"size\": \"1792x1024\",\n  \"quality\": \"standard\"\n}",
         "options": {}
       },
       "credentials": {
-        "oAuth2Api": {
-          "id": "google-drive-oauth2",
-          "name": "Google Drive OAuth2"
+        "httpHeaderAuth": {
+          "id": "openai-api-key",
+          "name": "OpenAI API Key"
         }
       }
     },
     {
       "id": "f6a7b8c9-d0e1-2345-fabc-456789012345",
-      "name": "Pick Random Image",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [1240, 300],
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "const files = $input.all();\n\nif (files.length === 0) {\n  return [{ json: { fileId: 'DEFAULT_IMAGE_FILE_ID_PLACEHOLDER', fileName: 'default.png' } }];\n}\n\nconst randomFile = files[Math.floor(Math.random() * files.length)];\nreturn [{ json: { fileId: randomFile.json.id, fileName: randomFile.json.name } }];"
-      }
-    },
-    {
-      "id": "a7b8c9d0-e1f2-3456-abcd-567890123456",
-      "name": "Download Image",
+      "name": "Download DALLE Image",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1440, 300],
+      "position": [1240, 300],
       "parameters": {
         "method": "GET",
-        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}?alt=media",
-        "authentication": "oAuth2",
+        "url": "={{ $json.data[0].url }}",
         "options": {
           "response": {
             "response": {
@@ -118,12 +116,6 @@
             }
           }
         }
-      },
-      "credentials": {
-        "oAuth2Api": {
-          "id": "google-drive-oauth2",
-          "name": "Google Drive OAuth2"
-        }
       }
     },
     {
@@ -131,7 +123,7 @@
       "name": "Register LinkedIn Image Upload",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1640, 300],
+      "position": [1440, 300],
       "parameters": {
         "method": "POST",
         "url": "https://api.linkedin.com/v2/assets?action=registerUpload",
@@ -161,7 +153,7 @@
       "name": "Upload Image to LinkedIn",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1840, 300],
+      "position": [1640, 300],
       "parameters": {
         "method": "PUT",
         "url": "={{ $json.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest'].uploadUrl }}",
@@ -182,7 +174,7 @@
       "name": "Publish LinkedIn Post",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [2040, 300],
+      "position": [1840, 300],
       "parameters": {
         "method": "POST",
         "url": "https://api.linkedin.com/v2/ugcPosts",
@@ -206,41 +198,6 @@
           "name": "LinkedIn Bearer Token"
         }
       }
-    },
-    {
-      "id": "e1f2a3b4-c5d6-7890-efab-901234567890",
-      "name": "Send Success Notification",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [2240, 300],
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.twilio.com/2010-04-01/Accounts/YOUR_ACCOUNT_SID_PLACEHOLDER/Messages.json",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBasicAuth",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            { "name": "Content-Type", "value": "application/x-www-form-urlencoded" }
-          ]
-        },
-        "sendBody": true,
-        "contentType": "form",
-        "bodyParameters": {
-          "parameters": [
-            { "name": "From", "value": "whatsapp:+14155238886" },
-            { "name": "To", "value": "whatsapp:+254113303583" },
-            { "name": "Body", "value": "=✅ TechsCrafts LinkedIn post published successfully!\n\nPillar: {{ $('Select Content Pillar').first().json.pillar }}\nTopic: {{ $('Select Content Pillar').first().json.topic }}\nTime: {{ new Date().toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' }) }}" }
-          ]
-        },
-        "options": {}
-      },
-      "credentials": {
-        "httpBasicAuth": {
-          "id": "twilio-basic-auth",
-          "name": "Twilio Basic Auth"
-        }
-      }
     }
   ],
   "connections": {
@@ -261,20 +218,15 @@
     },
     "Generate LinkedIn Post": {
       "main": [
-        [{ "node": "List Pillar Images", "type": "main", "index": 0 }]
+        [{ "node": "Generate Post Image", "type": "main", "index": 0 }]
       ]
     },
-    "List Pillar Images": {
+    "Generate Post Image": {
       "main": [
-        [{ "node": "Pick Random Image", "type": "main", "index": 0 }]
+        [{ "node": "Download DALLE Image", "type": "main", "index": 0 }]
       ]
     },
-    "Pick Random Image": {
-      "main": [
-        [{ "node": "Download Image", "type": "main", "index": 0 }]
-      ]
-    },
-    "Download Image": {
+    "Download DALLE Image": {
       "main": [
         [{ "node": "Register LinkedIn Image Upload", "type": "main", "index": 0 }]
       ]
@@ -287,11 +239,6 @@
     "Upload Image to LinkedIn": {
       "main": [
         [{ "node": "Publish LinkedIn Post", "type": "main", "index": 0 }]
-      ]
-    },
-    "Publish LinkedIn Post": {
-      "main": [
-        [{ "node": "Send Success Notification", "type": "main", "index": 0 }]
       ]
     }
   },
