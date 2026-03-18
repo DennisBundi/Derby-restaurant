@@ -49,25 +49,24 @@
       "position": [840, 300],
       "parameters": {
         "method": "POST",
-        "url": "https://api.anthropic.com/v1/messages",
+        "url": "https://api.openai.com/v1/chat/completions",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "anthropic-version", "value": "2023-06-01" },
-            { "name": "content-type", "value": "application/json" }
+            { "name": "Content-Type", "value": "application/json" }
           ]
         },
         "sendBody": true,
         "contentType": "json",
-        "body": "={\n  \"model\": \"claude-sonnet-4-6\",\n  \"max_tokens\": 600,\n  \"system\": \"{{ $('Build Claude Prompt').first().json.systemPrompt }}\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $('Build Claude Prompt').first().json.userInstruction }}\"\n    }\n  ]\n}",
+        "body": "={\n  \"model\": \"gpt-4o\",\n  \"max_tokens\": 600,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"{{ $('Build Claude Prompt').first().json.systemPrompt }}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $('Build Claude Prompt').first().json.userInstruction }}\"\n    }\n  ]\n}",
         "options": {}
       },
       "credentials": {
         "httpHeaderAuth": {
-          "id": "anthropic-api-key",
-          "name": "Anthropic API Key"
+          "id": "openai-api-key",
+          "name": "OpenAI API Key"
         }
       }
     },
@@ -198,7 +197,7 @@
         },
         "sendBody": true,
         "contentType": "json",
-        "body": "={\n  \"author\": \"urn:li:organization:ORG_ID_PLACEHOLDER\",\n  \"lifecycleState\": \"PUBLISHED\",\n  \"specificContent\": {\n    \"com.linkedin.ugc.ShareContent\": {\n      \"shareCommentary\": {\n        \"text\": \"{{ $('Generate LinkedIn Post').first().json.content[0].text }}\"\n      },\n      \"shareMediaCategory\": \"IMAGE\",\n      \"media\": [\n        {\n          \"status\": \"READY\",\n          \"description\": {\n            \"text\": \"TechsCrafts LinkedIn Post\"\n          },\n          \"media\": \"{{ $('Register LinkedIn Image Upload').first().json.value.asset }}\",\n          \"title\": {\n            \"text\": \"TechsCrafts\"\n          }\n        }\n      ]\n    }\n  },\n  \"visibility\": {\n    \"com.linkedin.ugc.MemberNetworkVisibility\": \"PUBLIC\"\n  }\n}",
+        "body": "={\n  \"author\": \"urn:li:organization:ORG_ID_PLACEHOLDER\",\n  \"lifecycleState\": \"PUBLISHED\",\n  \"specificContent\": {\n    \"com.linkedin.ugc.ShareContent\": {\n      \"shareCommentary\": {\n        \"text\": \"{{ $('Generate LinkedIn Post').first().json.choices[0].message.content }}\"\n      },\n      \"shareMediaCategory\": \"IMAGE\",\n      \"media\": [\n        {\n          \"status\": \"READY\",\n          \"description\": {\n            \"text\": \"TechsCrafts LinkedIn Post\"\n          },\n          \"media\": \"{{ $('Register LinkedIn Image Upload').first().json.value.asset }}\",\n          \"title\": {\n            \"text\": \"TechsCrafts\"\n          }\n        }\n      ]\n    }\n  },\n  \"visibility\": {\n    \"com.linkedin.ugc.MemberNetworkVisibility\": \"PUBLIC\"\n  }\n}",
         "options": {}
       },
       "credentials": {
