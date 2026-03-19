@@ -1,3 +1,4 @@
+import { useFadeIn } from '../../hooks/useFadeIn'
 import styles from './MassSchedule.module.css'
 
 const masses = [
@@ -9,12 +10,13 @@ const masses = [
 ]
 
 export default function MassSchedule() {
+  const ref = useFadeIn()
   return (
     <section id="mass-schedule" className={styles.section}>
       <div className={styles.container}>
         <p className="sectionLabel centered">Mass Times — Nyakati za Misa</p>
         <h2 className={`${styles.title} centered`}>Join Us in Worship</h2>
-        <div className={`glass ${styles.card}`}>
+        <div ref={ref} className={`glass ${styles.card}`}>
           <div className={styles.tableWrap}>
             <table className={styles.table}>
               <thead>

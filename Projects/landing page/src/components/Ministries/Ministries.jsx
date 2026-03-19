@@ -1,3 +1,4 @@
+import { useFadeIn } from '../../hooks/useFadeIn'
 import styles from './Ministries.module.css'
 
 const ministries = [
@@ -8,12 +9,13 @@ const ministries = [
 ]
 
 export default function Ministries() {
+  const ref = useFadeIn()
   return (
     <section id="ministries" className={styles.section}>
       <div className={styles.container}>
         <p className="sectionLabel centered">Ministries — Huduma</p>
         <h2 className={`${styles.title} centered`}>Find Your Community</h2>
-        <div className={styles.grid}>
+        <div ref={ref} className={styles.grid}>
           {ministries.map(({ icon, name, desc }) => (
             <div key={name} className={`glass ${styles.card}`}>
               <div className={styles.icon}>{icon}</div>

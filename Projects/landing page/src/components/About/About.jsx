@@ -1,10 +1,12 @@
+import { useFadeIn } from '../../hooks/useFadeIn'
 import styles from './About.module.css'
 
 export default function About() {
+  const ref = useFadeIn()
   return (
     <section id="about" className={styles.section}>
       <div className={styles.container}>
-        <div className={`glass ${styles.card}`}>
+        <div ref={ref} className={`glass ${styles.card}`}>
           <div className={styles.text}>
             <p className="sectionLabel">About Us — Kuhusu Sisi</p>
             <h2 className={styles.title}>A Parish Rooted in Faith</h2>

@@ -1,3 +1,4 @@
+import { useFadeIn } from '../../hooks/useFadeIn'
 import styles from './Events.module.css'
 
 const events = [
@@ -7,12 +8,13 @@ const events = [
 ]
 
 export default function Events() {
+  const ref = useFadeIn()
   return (
     <section id="events" className={styles.section}>
       <div className={styles.container}>
         <p className="sectionLabel centered">Events — Matukio</p>
         <h2 className={`${styles.title} centered`}>Upcoming Gatherings</h2>
-        <div className={styles.list}>
+        <div ref={ref} className={styles.list}>
           {events.map(({ day, month, title, desc }) => (
             <div key={title} className={`glass ${styles.card}`}>
               <div className={styles.dateBadge}>

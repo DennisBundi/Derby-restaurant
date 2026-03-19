@@ -1,3 +1,4 @@
+import { useFadeIn } from '../../hooks/useFadeIn'
 import styles from './Contact.module.css'
 
 const details = [
@@ -8,12 +9,13 @@ const details = [
 ]
 
 export default function Contact() {
+  const ref = useFadeIn()
   return (
     <section id="contact" className={styles.section}>
       <div className={styles.container}>
         <p className="sectionLabel centered">Contact — Wasiliana Nasi</p>
         <h2 className={`${styles.title} centered`}>Find Us</h2>
-        <div className={styles.grid}>
+        <div ref={ref} className={styles.grid}>
           <div className={`glass ${styles.info}`}>
             {details.map(({ icon, label, value }) => (
               <div key={label} className={styles.item}>
