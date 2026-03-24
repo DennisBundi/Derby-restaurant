@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "How ShelfReady collects, uses, and protects your personal information.",
+  alternates: { canonical: "https://shelfready.store/privacy" },
 };
 
 export default function PrivacyPage() {
@@ -21,7 +22,7 @@ export default function PrivacyPage() {
         </Link>
 
         <h1 className="text-3xl font-bold text-brand-navy mb-2">Privacy Policy</h1>
-        <p className="text-sm text-gray-400 mb-10">Last updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
+        <p className="text-sm text-gray-400 mb-10">Last updated: March 24, 2026</p>
 
         <div className="prose prose-gray max-w-none space-y-8 text-sm text-gray-600 leading-relaxed">
 
@@ -61,7 +62,7 @@ export default function PrivacyPage() {
               <li>Request deletion of your data at any time</li>
               <li>Opt out of any communications from us</li>
             </ul>
-            <p className="mt-3">To exercise any of these rights, email us at <span className="text-brand">privacy@shelfready.com</span>.</p>
+            <p className="mt-3">To exercise any of these rights, email us at <span className="text-brand">privacy@shelfready.store</span>.</p>
           </section>
 
           <section>
@@ -76,7 +77,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-lg font-bold text-brand-navy mb-2">7. Contact</h2>
-            <p>For any privacy-related questions, contact us at <span className="text-brand">privacy@shelfready.com</span>.</p>
+            <p>For any privacy-related questions, contact us at <span className="text-brand">privacy@shelfready.store</span>.</p>
           </section>
 
         </div>

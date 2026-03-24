@@ -37,7 +37,7 @@ const features = [
   },
 ];
 
-const delays = ["delay-100", "delay-200", "delay-300"];
+const delays = ["anim-delay-100", "anim-delay-200", "anim-delay-300"];
 
 export default function FeaturesSection() {
   return (

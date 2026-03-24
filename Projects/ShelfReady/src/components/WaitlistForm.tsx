@@ -15,7 +15,6 @@ export default function WaitlistForm() {
     e.preventDefault();
     if (status === "loading") return;
 
-    // Client-side email validation
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setStatus("error");
       setErrorMsg("Please enter a valid email address.");
@@ -36,16 +35,10 @@ export default function WaitlistForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-2 py-4">
+      <div role="status" className="flex flex-col items-center gap-2 py-4">
         <div className="flex items-center justify-center w-12 h-12 rounded-full bg-brand-light">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M5 13l4 4L19 7"
-              stroke="#1D9E75"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            <path d="M5 13l4 4L19 7" stroke="#1D9E75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
         <p className="text-lg font-semibold text-brand-navy">You&apos;re on the list!</p>
@@ -55,29 +48,36 @@ export default function WaitlistForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      className="flex flex-col gap-3 w-full max-w-md"
-    >
-      <input
-        type="text"
-        placeholder="First name (optional)"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        className="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
-      />
-      <input
-        type="email"
-        placeholder="Your email address"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value);
-          if (status === "error") setStatus("idle");
-        }}
-        required
-        className="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
-      />
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3 w-full max-w-md">
+      <div className="flex flex-col gap-1">
+        <label htmlFor="firstName" className="sr-only">First name (optional)</label>
+        <input
+          id="firstName"
+          type="text"
+          placeholder="First name (optional)"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value.slice(0, 100))}
+          className="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="email" className="sr-only">Email address</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="Your email address"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (status === "error") setStatus("idle");
+          }}
+          required
+          aria-required="true"
+          className="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+        />
+      </div>
+
       <button
         type="submit"
         disabled={status === "loading"}
@@ -87,12 +87,12 @@ export default function WaitlistForm() {
       </button>
 
       {status === "duplicate" && (
-        <p className="text-sm text-amber-600 text-center">
+        <p role="status" className="text-sm text-amber-600 text-center">
           You&apos;re already on the list! We&apos;ll see you at launch.
         </p>
       )}
       {status === "error" && (
-        <p className="text-sm text-red-500 text-center">{errorMsg}</p>
+        <p role="alert" className="text-sm text-red-500 text-center">{errorMsg}</p>
       )}
     </form>
   );

@@ -11,7 +11,7 @@ html {
   height: 100%;
 }
 
-section {
+section, footer {
   scroll-snap-align: start;
 }
 
@@ -44,11 +44,11 @@ section {
 }
 
 /* Stagger delays for hero children */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
+.anim-delay-100 { animation-delay: 100ms; }
+.anim-delay-200 { animation-delay: 200ms; }
+.anim-delay-300 { animation-delay: 300ms; }
+.anim-delay-400 { animation-delay: 400ms; }
+.anim-delay-500 { animation-delay: 500ms; }
 
 /* ── Scroll reveal ── */
 .reveal {

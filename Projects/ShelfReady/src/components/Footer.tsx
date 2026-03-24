@@ -4,7 +4,6 @@ export default function Footer() {
   return (
     <footer
       className="bg-white border-t border-gray-100 py-10 px-4"
-      style={{ scrollSnapAlign: "start" }}
     >
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-4">
         {/* Wordmark */}

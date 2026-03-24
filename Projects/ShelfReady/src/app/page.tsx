@@ -12,7 +12,7 @@ const jsonLd = {
   operatingSystem: "Web",
   description:
     "AI-powered product photography for online sellers. Upload your product and get professional lifestyle photos with AI-generated models and backgrounds in seconds.",
-  url: "https://shelfready.com",
+  url: "https://shelfready.store",
   offers: {
     "@type": "Offer",
     availability: "https://schema.org/PreOrder",
@@ -21,7 +21,7 @@ const jsonLd = {
   creator: {
     "@type": "Organization",
     name: "ShelfReady",
-    url: "https://shelfready.com",
+    url: "https://shelfready.store",
   },
 };
 

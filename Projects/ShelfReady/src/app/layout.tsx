@@ -9,7 +9,7 @@ const geistSans = localFont({
   weight: "100 900",
 });
 
-const siteUrl = "https://shelfready.com";
+const siteUrl = "https://shelfready.store";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -50,6 +50,7 @@ export const metadata: Metadata = {
       "Skip the studio. Skip the photographer. Upload your product and AI generates professional lifestyle photos in seconds.",
     siteName: "ShelfReady",
     locale: "en_US",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "ShelfReady — AI Product Photography" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -57,6 +58,7 @@ export const metadata: Metadata = {
     description:
       "Skip the studio. Skip the photographer. Upload your product and AI generates professional lifestyle photos in seconds.",
     creator: "@shelfready",
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: siteUrl,

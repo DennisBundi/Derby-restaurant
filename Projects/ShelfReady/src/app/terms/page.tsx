@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "The terms and conditions for using ShelfReady.",
+  alternates: { canonical: "https://shelfready.store/terms" },
 };
 
 export default function TermsPage() {
@@ -21,7 +22,7 @@ export default function TermsPage() {
         </Link>
 
         <h1 className="text-3xl font-bold text-brand-navy mb-2">Terms of Service</h1>
-        <p className="text-sm text-gray-400 mb-10">Last updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
+        <p className="text-sm text-gray-400 mb-10">Last updated: March 24, 2026</p>
 
         <div className="prose prose-gray max-w-none space-y-8 text-sm text-gray-600 leading-relaxed">
 
@@ -67,7 +68,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-lg font-bold text-brand-navy mb-2">9. Contact</h2>
-            <p>For any questions about these terms, contact us at <span className="text-brand">hello@shelfready.com</span>.</p>
+            <p>For any questions about these terms, contact us at <span className="text-brand">hello@shelfready.store</span>.</p>
           </section>
 
         </div>
