@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 import styles from './MenuCard.module.css'
 
 function imgUrl(keyword) {
-  return `https://source.unsplash.com/600x400/?${keyword}`
+  return `https://picsum.photos/seed/${encodeURIComponent(keyword)}/600/400`
 }
 
 export default function MenuCard({ item, onAddToCart }) {
@@ -43,7 +43,7 @@ export default function MenuCard({ item, onAddToCart }) {
               const vAsk = v.askPrice || v.price === null
               const fullName = `${item.name} – ${v.name}`
               return (
-                <div
+                <button
                   key={v.name}
                   className={styles.variantRow}
                   onClick={() => onAddToCart(fullName, v.price, item.emoji, vAsk)}
@@ -52,7 +52,7 @@ export default function MenuCard({ item, onAddToCart }) {
                   <span className={styles.variantPrice}>
                     {vAsk ? 'Ask for price' : `Ksh ${v.price.toLocaleString()}`}
                   </span>
-                </div>
+                </button>
               )
             })}
           </div>

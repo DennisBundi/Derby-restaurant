@@ -63,11 +63,14 @@
 .variants { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
 .variantRow {
   display: flex; align-items: center; justify-content: space-between;
+  width: 100%;
   padding: 8px 12px;
   background: rgba(212,160,23,0.06);
   border: 1px solid rgba(212,160,23,0.12);
   border-radius: 8px;
   cursor: pointer;
+  font-family: inherit;
+  text-align: left;
   transition: background 0.18s, border-color 0.18s;
 }
 .variantRow:hover { background: rgba(212,160,23,0.14); border-color: rgba(212,160,23,0.3); }
