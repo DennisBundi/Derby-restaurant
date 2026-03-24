@@ -21,10 +21,10 @@ export default function App() {
     return () => { document.body.style.overflow = '' }
   }, [cartOpen])
 
-  function showToast(msg) {
+  const showToast = useCallback((msg) => {
     setToastMsg(msg)
     setTimeout(() => setToastMsg(''), 2200)
-  }
+  }, [])
 
   const addToCart = useCallback((name, price, emoji, askPrice = false) => {
     setCart(prev => {
