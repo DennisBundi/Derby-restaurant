@@ -57,7 +57,7 @@ export default function WaitlistForm() {
           placeholder="First name (optional)"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value.slice(0, 100))}
-          className="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+          className="rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-gray-500 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
         />
       </div>
 
@@ -74,7 +74,7 @@ export default function WaitlistForm() {
           }}
           required
           aria-required="true"
-          className="rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+          className="rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-gray-500 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
         />
       </div>
 

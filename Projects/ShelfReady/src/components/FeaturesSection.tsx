@@ -53,10 +53,10 @@ export default function FeaturesSection() {
           </p>
         </ScrollReveal>
 
-        <div className="grid sm:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-3 gap-6 items-stretch">
           {features.map((f, i) => (
-            <ScrollReveal key={f.title} className={`reveal ${delays[i]}`}>
-              <div className="rounded-2xl border border-gray-100 p-7 shadow-sm hover:shadow-md hover:border-brand-light hover:-translate-y-1 transition-all duration-300">
+            <ScrollReveal key={f.title} className={`reveal ${delays[i]} h-full`}>
+              <div className="h-full rounded-2xl border border-gray-100 p-7 shadow-sm hover:shadow-md hover:border-brand-light hover:-translate-y-1 transition-all duration-300">
                 <div className="w-12 h-12 rounded-xl bg-brand-light flex items-center justify-center mb-5">
                   {f.icon}
                 </div>

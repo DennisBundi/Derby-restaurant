@@ -61,7 +61,7 @@ export default function Logo({ className }: { className?: string }) {
 
       {/* Wordmark */}
       <span className="text-xl font-bold tracking-tight leading-none">
-        <span style={{ color: "#1A2E35" }}>Shelf</span>
+        <span style={{ color: "#ffffff" }}>Shelf</span>
         <span style={{ color: "#1D9E75" }}>Ready</span>
       </span>
     </div>
