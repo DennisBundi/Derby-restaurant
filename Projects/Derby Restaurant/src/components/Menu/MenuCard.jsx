@@ -2,7 +2,9 @@ import { useRef, useEffect } from 'react'
 import styles from './MenuCard.module.css'
 
 function imgUrl(keyword) {
-  return `https://picsum.photos/seed/${encodeURIComponent(keyword)}/600/400`
+  const tag = keyword.split(',')[0]
+  const lock = Array.from(keyword).reduce((a, c) => a + c.charCodeAt(0), 0) % 97 + 1
+  return `https://loremflickr.com/600/400/food,${encodeURIComponent(tag)}?lock=${lock}`
 }
 
 export default function MenuCard({ item, onAddToCart }) {
