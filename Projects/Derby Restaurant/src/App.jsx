@@ -36,7 +36,7 @@ export default function App() {
     })
     showToast('🍽️ Added to your order!')
     setCartOpen(true)
-  }, [])
+  }, [showToast])
 
   const updateQty = useCallback((name, delta) => {
     setCart(prev => {
@@ -47,7 +47,7 @@ export default function App() {
 
   const clearCart = useCallback(() => setCart([]), [])
 
-  function sendWhatsApp(notes) {
+  const sendWhatsApp = useCallback((notes) => {
     if (cart.length === 0) return
     const lines = cart.map(item => {
       const priceStr = item.askPrice ? '(price TBC)' : `Ksh ${(item.price * item.qty).toLocaleString()}`
@@ -63,7 +63,7 @@ export default function App() {
     msg += `\n_Ordered via Derby Restaurant website_`
 
     window.open('https://wa.me/254792981907?text=' + encodeURIComponent(msg), '_blank')
-  }
+  }, [cart])
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0)
 
