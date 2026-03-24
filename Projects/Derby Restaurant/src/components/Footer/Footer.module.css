@@ -1,0 +1,9 @@
+.footer {
+  text-align: center;
+  padding: 60px 24px;
+  border-top: 1px solid rgba(212,160,23,0.1);
+}
+.name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 10px; }
+.loc  { color: var(--muted); font-size: 0.85rem; margin-bottom: 10px; }
+.loc a { color: var(--gold); }
+.tag  { color: var(--muted); font-size: 0.8rem; font-style: italic; max-width: 440px; margin: 0 auto; }

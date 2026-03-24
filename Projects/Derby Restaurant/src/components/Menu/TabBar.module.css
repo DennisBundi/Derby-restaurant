@@ -1,0 +1,19 @@
+.bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+.btn {
+  background: var(--surface);
+  border: 1px solid rgba(212,160,23,0.15);
+  color: var(--muted);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+}
+.btn:hover { color: var(--cream); border-color: rgba(212,160,23,0.4); }
+.active {
+  background: linear-gradient(135deg, var(--gold), var(--amber));
+  border-color: transparent;
+  color: #0e0b08;
+}
+@media (max-width: 600px) { .btn { font-size: 0.78rem; padding: 8px 14px; } }

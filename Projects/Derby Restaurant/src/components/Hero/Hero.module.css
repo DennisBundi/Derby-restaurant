@@ -1,0 +1,94 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 24px 80px;
+  overflow: hidden;
+}
+.bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(212,160,23,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(224,123,36,0.12) 0%, transparent 55%);
+  z-index: 0;
+}
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  animation: fadeUp 0.9s ease both;
+}
+.badge {
+  display: inline-block;
+  background: rgba(212,160,23,0.12);
+  border: 1px solid rgba(212,160,23,0.35);
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 24px;
+  letter-spacing: 0.05em;
+}
+.title {
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.titleMain  { color: var(--cream); display: block; }
+.titleGold  {
+  background: linear-gradient(135deg, var(--gold), var(--amber));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+.sub {
+  color: var(--muted);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  max-width: 520px;
+  margin: 0 auto 36px;
+}
+.ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btnGold {
+  background: linear-gradient(135deg, var(--gold), var(--amber));
+  color: #0e0b08;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 14px 32px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btnGold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,160,23,0.35); }
+.btnGhost {
+  background: transparent;
+  color: var(--cream);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 13px 32px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(245,234,216,0.3);
+  transition: border-color 0.2s, background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btnGhost:hover { border-color: var(--cream); background: rgba(245,234,216,0.06); }
+.scrollIndicator {
+  position: absolute;
+  bottom: 32px; left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold);
+  font-size: 1.4rem;
+  animation: bounce 1.8s ease-in-out infinite;
+  z-index: 2;
+}
+@media (max-width: 600px) { .hero { padding: 90px 16px 60px; } }
