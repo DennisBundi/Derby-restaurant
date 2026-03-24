@@ -244,7 +244,7 @@ h1, h2, h3, .footer-name { font-family: 'Playfair Display', serif; }
   padding: 10px 20px;
   border-radius: var(--radius-pill);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s;
 }
 .tab-btn:hover { color: var(--cream); border-color: rgba(212,160,23,0.4); }
 .tab-btn.active {
@@ -286,6 +286,7 @@ h1, h2, h3, .footer-name { font-family: 'Playfair Display', serif; }
   background-size: 600px 100%;
   animation: shimmer 1.4s infinite linear;
 }
+.card-img-wrap.loaded::before { animation: none; display: none; }
 .card-img {
   position: relative;
   z-index: 2;
@@ -649,6 +650,193 @@ footer {
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
-  <script>/* JS goes here */</script>
+  <script>
+// === MENU DATA ===
+const MENU = {
+  specials: [
+    {
+      name: 'Special Mega Platter', price: 5000, emoji: '🎉',
+      img: 'grilled,meat,platter,kenya', badge: '⭐ Signature',
+      desc: 'Chicken, Fries, Masala chips, Veg rice, Fish fingers, Chapati, Pilau, 1L Soda'
+    },
+    {
+      name: 'Platter for 4', price: 5000, emoji: '👨‍👩‍👧‍👦',
+      img: 'african,food,platter', badge: '👨‍👩‍👧‍👦 For 4',
+      desc: 'Beef, Mutton dry fry, Veg rice, Chapati, Brown ugali, Pilau, Soda 1L'
+    },
+    {
+      name: 'Mutton Sizzling', price: 2500, emoji: '🔥',
+      img: 'sizzling,mutton,goat,meat', badge: '🔥 Sizzling',
+      desc: 'Served with your choice of accompaniment'
+    },
+    {
+      name: 'Wings Combo', price: 2500, emoji: '🍗',
+      img: 'chicken,wings,drumsticks,fries', badge: '🍗 Combo',
+      desc: 'Fries with drumsticks + Soda 1L'
+    },
+    {
+      name: 'Whole Tilapia', price: 2500, emoji: '🐟',
+      img: 'whole,grilled,tilapia,fish', badge: '🐟 Fresh',
+      desc: 'Served with Ugali/Rice/Pilau + glass of wine/juice/soda'
+    },
+    {
+      name: 'Shawarma Platter', price: 2500, emoji: '🌯',
+      img: 'shawarma,wrap,plate', badge: '🌯 Popular',
+      desc: 'Served with Soda 1L'
+    },
+    {
+      name: 'Special Loaded Fries', price: null, emoji: '🍟',
+      img: 'loaded,fries,toppings', badge: '🍟 Loaded', askPrice: true,
+      desc: 'All served with Soda 500ml',
+      variants: [
+        { name: 'BBQ Beef', price: null, askPrice: true },
+        { name: 'BBQ Mutton', price: null, askPrice: true },
+        { name: 'Fish Fingers', price: null, askPrice: true },
+        { name: 'Sweet Chili Chicken', price: null, askPrice: true }
+      ]
+    },
+    {
+      name: 'Chicken Biriyani', price: null, emoji: '⭐',
+      img: 'chicken,biryani,rice', badge: '⭐ Must Try', askPrice: true,
+      desc: "Derby's most celebrated dish"
+    },
+    {
+      name: 'Special Platter', price: 2500, emoji: '🥘',
+      img: 'mixed,food,platter,restaurant', badge: '🥘 Special',
+      desc: "Derby's signature curated platter"
+    }
+  ],
+  crunchies: [
+    {
+      name: 'Pizza', price: null, emoji: '🍕',
+      img: 'pizza,slice,crispy', badge: '🍕 4 Sizes',
+      desc: 'Freshly made, choose your size',
+      variants: [
+        { name: 'XL', price: 1500 },
+        { name: 'Large', price: 1300 },
+        { name: 'Medium', price: 1000 },
+        { name: 'Small', price: 500 }
+      ]
+    },
+    {
+      name: 'Chicken Shawarma', price: null, emoji: '🌯',
+      img: 'chicken,shawarma,wrap', badge: '🌯 3 Sizes',
+      desc: 'Loaded chicken shawarma wrap',
+      variants: [
+        { name: 'Megah', price: 600 },
+        { name: 'Special', price: 400 },
+        { name: 'Mini', price: 300 }
+      ]
+    },
+    { name: 'Chicken Pie', price: 220, emoji: '🥧', img: 'chicken,pastry,pie', desc: 'Golden pastry filled with spiced chicken' },
+    { name: 'Meat Pie', price: 200, emoji: '🥧', img: 'meat,pie,pastry', desc: 'Classic savoury meat-filled pastry' },
+    { name: 'Sausage Roll', price: 150, emoji: '🌭', img: 'sausage,roll,pastry', desc: 'Buttery pastry wrapped sausage' },
+    { name: 'Hotdog', price: 150, emoji: '🌭', img: 'hotdog,sausage,bun', desc: 'Classic hotdog in a soft bun' },
+    { name: 'Chicken Grill', price: 400, emoji: '🍗', img: 'grilled,chicken,whole', badge: '🔥 Grilled', desc: 'Whole grilled chicken, perfectly seasoned' }
+  ],
+  bakery: [
+    { name: 'Chocolate Muffin', price: 150, emoji: '🧁', img: 'chocolate,muffin,bakery', desc: 'Rich chocolate muffin, freshly baked' },
+    {
+      name: 'Queencakes', price: null, emoji: '🧁',
+      img: 'cupcakes,fairy,cakes',
+      desc: 'Light, fluffy fairy cakes',
+      variants: [
+        { name: '3 pieces', price: 140 },
+        { name: '1 piece', price: 50 }
+      ]
+    },
+    { name: 'Cookies', price: 60, emoji: '🍪', img: 'cookies,chocolate,chip', desc: 'Freshly baked chocolate chip cookies' }
+  ],
+  drinks: [
+    { name: 'Soft Drinks / Soda', price: null, emoji: '🥤', img: 'cold,soda,cans,drinks', askPrice: true, desc: 'Chilled sodas and soft drinks' },
+    { name: 'Mocktails', price: null, emoji: '🍹', img: 'colorful,mocktail,fruity,drink', badge: '🍹 Non-Alcoholic', askPrice: true, desc: 'Creative non-alcoholic cocktail blends' },
+    { name: 'Milkshakes', price: null, emoji: '🥛', img: 'thick,milkshake,glass', askPrice: true, desc: 'Thick and creamy blended milkshakes' },
+    { name: 'Hot Drinks', price: null, emoji: '☕', img: 'hot,tea,coffee,mug', badge: '☕ Warm Up', askPrice: true, desc: 'Tea, Coffee, Dawa — warming drinks' },
+    { name: 'Juices & Water', price: null, emoji: '🍊', img: 'fresh,orange,juice,glass', askPrice: true, desc: 'Fresh juices and bottled water' }
+  ]
+};
+
+// === CARD RENDERING ===
+function imgUrl(keyword) {
+  return `https://source.unsplash.com/600x400/?${keyword}`;
+}
+
+function buildCard(item) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  const hasVariants = item.variants && item.variants.length > 0;
+  card.innerHTML = `
+    <div class="card-img-wrap">
+      ${item.badge ? `<span class="card-badge">${item.badge}</span>` : ''}
+      <img class="card-img" src="${imgUrl(item.img)}" alt="${item.name}" loading="lazy" />
+    </div>
+    <div class="card-body">
+      <div class="card-name">${item.name}</div>
+      <div class="card-desc">${item.desc || ''}</div>
+      ${hasVariants ? buildVariants(item) : buildSingleFooter(item)}
+    </div>
+  `;
+  // Hide shimmer once image has loaded
+  const img = card.querySelector('.card-img');
+  img.addEventListener('load', () => {
+    img.closest('.card-img-wrap').classList.add('loaded');
+  });
+  return card;
+}
+
+function buildSingleFooter(item) {
+  const priceHtml = item.askPrice
+    ? `<span class="card-price ask">Ask for price</span>`
+    : `<span class="card-price">Ksh ${item.price.toLocaleString()}</span>`;
+  return `
+    <div class="card-footer">
+      ${priceHtml}
+      <button class="add-btn" onclick="addToCart(${JSON.stringify(item.name)}, ${item.price}, ${JSON.stringify(item.emoji)}, ${!!item.askPrice})">+</button>
+    </div>
+  `;
+}
+
+function buildVariants(item) {
+  return `<div class="variants">
+    ${item.variants.map(v => {
+      const vPrice = (v.askPrice || v.price === null) ? null : v.price;
+      const vAsk = v.askPrice || v.price === null;
+      const priceLabel = vAsk ? 'Ask for price' : `Ksh ${vPrice.toLocaleString()}`;
+      const fullName = `${item.name} – ${v.name}`;
+      return `<div class="variant-row" onclick="addToCart(${JSON.stringify(fullName)}, ${vPrice}, ${JSON.stringify(item.emoji)}, ${vAsk})">
+        <span class="variant-name">${v.name}</span>
+        <span class="variant-price">${priceLabel}</span>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+function renderMenus() {
+  Object.keys(MENU).forEach(cat => {
+    const container = document.getElementById('cat-' + cat);
+    MENU[cat].forEach(item => container.appendChild(buildCard(item)));
+  });
+}
+
+renderMenus();
+
+// Add item counts to tab labels
+document.querySelectorAll('.tab-btn[data-cat]').forEach(btn => {
+  const cat = btn.dataset.cat;
+  if (MENU[cat]) {
+    btn.textContent = btn.textContent.split('(')[0].trim() + ` (${MENU[cat].length})`;
+  }
+});
+
+// Placeholders for functions called from HTML (implemented in later tasks)
+function showCat(catId, tabEl) { /* Task 4 */ }
+function addToCart(name, price, emoji, askPrice) { /* Task 5 */ }
+function updateQty(name, delta) { /* Task 5 */ }
+function renderCart() { /* Task 5 */ }
+function toggleCart() { /* Task 6 */ }
+function sendWhatsApp() { /* Task 6 */ }
+function showToast(msg) { /* Task 6 */ }
+function clearCart() { /* Task 6 */ }
+  </script>
 </body>
 </html>
