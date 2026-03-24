@@ -781,6 +781,7 @@ function buildCard(item) {
   img.addEventListener('load', () => {
     img.closest('.card-img-wrap').classList.add('loaded');
   });
+  if (img.complete) img.closest('.card-img-wrap').classList.add('loaded');
   return card;
 }
 
@@ -824,7 +825,9 @@ renderMenus();
 document.querySelectorAll('.tab-btn[data-cat]').forEach(btn => {
   const cat = btn.dataset.cat;
   if (MENU[cat]) {
-    btn.textContent = btn.textContent.split('(')[0].trim() + ` (${MENU[cat].length})`;
+    const label = btn.dataset.label || btn.textContent.split('(')[0].trim();
+    btn.dataset.label = label;
+    btn.textContent = `${label} (${MENU[cat].length})`;
   }
 });
 
