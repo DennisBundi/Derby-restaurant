@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd ShelfReady && npm install && npm run build",
+  "outputDirectory": "ShelfReady/.next",
+  "installCommand": "cd ShelfReady && npm install",
+  "framework": "nextjs"
+}
