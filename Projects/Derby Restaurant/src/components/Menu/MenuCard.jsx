@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import styles from './MenuCard.module.css'
 
 function imgUrl(keyword) {
@@ -7,6 +7,13 @@ function imgUrl(keyword) {
 
 export default function MenuCard({ item, onAddToCart }) {
   const wrapRef = useRef(null)
+  const imgRef  = useRef(null)
+
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      wrapRef.current?.classList.add(styles.loaded)
+    }
+  }, [])
 
   function handleLoad() {
     if (wrapRef.current) wrapRef.current.classList.add(styles.loaded)
@@ -19,6 +26,7 @@ export default function MenuCard({ item, onAddToCart }) {
       <div className={styles.imgWrap} ref={wrapRef}>
         {item.badge && <span className={styles.badge}>{item.badge}</span>}
         <img
+          ref={imgRef}
           className={styles.img}
           src={imgUrl(item.img)}
           alt={item.name}
