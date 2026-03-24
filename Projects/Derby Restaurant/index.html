@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Derby Restaurant — Kiambu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>/* CSS goes here */</style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <span class="logo-derby">Derby</span>
+      <span class="logo-rest">Restaurant</span>
+    </div>
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒 <span class="cart-badge" id="cart-badge">0</span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <span class="badge-pill">📍 Kiambu's Hidden Gem</span>
+      <h1 class="hero-title"><span>Derby</span><span class="gold-gradient">Restaurant</span></h1>
+      <p class="hero-sub">Authentic platters, sizzling meats &amp; irresistible crunchies. Sit back and let us serve you excellence on every plate.</p>
+      <div class="hero-ctas">
+        <a href="#menu" class="btn-gold">View Menu</a>
+        <a href="https://wa.me/254792981907" class="btn-ghost" target="_blank" rel="noopener">📞 Call Us</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">&#x2193;</div>
+  </section>
+
+  <!-- ABOUT STRIP -->
+  <section id="about">
+    <span class="section-label">Why Derby?</span>
+    <h2>Kiambu's Best <em>Platters</em></h2>
+    <p class="about-desc">From sizzling meats to handcrafted crunchies, Derby Restaurant has been the heartbeat of Kiambu dining. Every dish is made with passion, fresh ingredients, and a commitment to flavour.</p>
+    <div class="info-pills">
+      <span class="pill">🕐 Open Daily</span>
+      <span class="pill">🍽️ Dine In &amp; Takeaway</span>
+      <span class="pill">📦 Group Platters</span>
+      <span class="pill">☕ Bar &amp; Beverages</span>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <span class="section-label">What We Serve</span>
+    <h2>Our Full Menu</h2>
+    <div class="tab-bar">
+      <button class="tab-btn active" data-cat="specials" onclick="showCat('specials', this)">⭐ Derby Specials</button>
+      <button class="tab-btn" data-cat="crunchies" onclick="showCat('crunchies', this)">🍕 Crunchies</button>
+      <button class="tab-btn" data-cat="bakery" onclick="showCat('bakery', this)">🧁 Bakery &amp; Sweets</button>
+      <button class="tab-btn" data-cat="drinks" onclick="showCat('drinks', this)">🥤 Drinks</button>
+    </div>
+    <div id="cat-specials" class="menu-section menu-grid"></div>
+    <div id="cat-crunchies" class="menu-section menu-grid" style="display:none"></div>
+    <div id="cat-bakery" class="menu-section menu-grid" style="display:none"></div>
+    <div id="cat-drinks" class="menu-section menu-grid" style="display:none"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-name">Derby Restaurant</p>
+    <p class="footer-loc">📍 Kiambu, Kenya &nbsp;|&nbsp; <a href="https://wa.me/254792981907">📱 +254 792 981 907</a></p>
+    <p class="footer-tag">Sit back, relax, and allow us to serve you excellence on every plate.</p>
+  </footer>
+
+  <!-- CART PANEL -->
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+  <aside class="cart-panel" id="cart-panel">
+    <div class="cart-header">
+      <span>🛒 Your Order</span>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="cart-close" onclick="clearCart()" title="Clear cart" style="font-size:0.75rem;padding:4px 10px;border-radius:6px;border:1px solid rgba(212,160,23,0.2)">🗑️ Clear</button>
+        <button class="cart-close" onclick="toggleCart()">✕</button>
+      </div>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total">Total: <span id="cart-total" class="total-amt">Ksh 0</span></div>
+      <textarea class="cart-notes" id="cart-notes" placeholder="e.g. Less spice, extra chapati, deliver to gate 3..."></textarea>
+      <button class="btn-whatsapp" id="wa-btn" onclick="sendWhatsApp()" disabled>
+        📲 Order via WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script>/* JS goes here */</script>
+</body>
+</html>
