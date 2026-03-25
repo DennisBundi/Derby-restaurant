@@ -7,12 +7,12 @@ export const MENU = {
     },
     {
       name: 'Platter for 4', price: 5000, emoji: '👨‍👩‍👧‍👦',
-      img: '/Screenshot 2026-03-25 081704.png', badge: '👨‍👩‍👧‍👦 For 4',
+      img: '/derby-chicken-special.jpg', badge: '👨‍👩‍👧‍👦 For 4',
       desc: 'Beef, Mutton dry fry, Veg rice, Chapati, Brown ugali, Pilau, Soda 1L'
     },
     {
       name: 'Derby Chicken Special', price: 400, emoji: '🍗',
-      img: '/Screenshot 2026-03-25 081704.png', badge: '🍗 Chef Pick',
+      img: '/derby-chicken-special.jpg', badge: '🍗 Chef Pick',
       desc: "Derby's signature chicken — ask your waiter for today's preparation"
     },
     {
@@ -27,7 +27,7 @@ export const MENU = {
     },
     {
       name: 'Derby Freaky Shake', price: 550, emoji: '🥤',
-      img: '/Screenshot 2026-03-25 081634.png', badge: '🥤 Iconic',
+      img: '/derby-freaky-shake.jpg', badge: '🥤 Iconic',
       desc: "Derby's over-the-top signature milkshake — a must-try"
     },
     {
@@ -100,7 +100,7 @@ export const MENU = {
     },
     {
       name: 'Chicken Shawarma', price: null, emoji: '🌯',
-      img: '/Screenshot 2026-03-25 081523.png', badge: '🌯 3 Sizes',
+      img: '/derby-shawarma.jpg', badge: '🌯 3 Sizes',
       desc: 'Loaded chicken shawarma wrap',
       variants: [
         { name: 'Mega',    price: 600 },
@@ -149,12 +149,12 @@ export const MENU = {
     { name: 'Passion Fruit Smoothie',  price: 450, emoji: '🍊', img: 'passion,fruit,smoothie',      desc: 'Tropical passion fruit smoothie' },
     { name: 'Vanilla Shake',    price: 350, emoji: '🥛', img: 'vanilla,milkshake,glass',     badge: '🥛 Shake', desc: 'Classic vanilla milkshake' },
     { name: 'Chocolate Shake',  price: 350, emoji: '🍫', img: 'chocolate,milkshake,thick',   desc: 'Rich chocolate milkshake' },
-    { name: 'Strawberry Shake', price: 350, emoji: '🍓', img: '/Screenshot 2026-03-25 081555.png', desc: 'Fresh strawberry milkshake' },
+    { name: 'Strawberry Shake', price: 350, emoji: '🍓', img: '/derby-shake.jpg', desc: 'Fresh strawberry milkshake' },
     { name: 'Mocha Shake',      price: 400, emoji: '☕', img: 'mocha,milkshake,coffee',      desc: 'Coffee mocha milkshake' },
     { name: 'Mango Shake',      price: 350, emoji: '🥭', img: 'mango,milkshake,tropical',    desc: 'Tropical mango milkshake' },
     { name: 'Banana Shake',     price: 350, emoji: '🍌', img: 'banana,milkshake,creamy',     desc: 'Creamy banana milkshake' },
     { name: 'Tropical Shake',   price: 400, emoji: '🍹', img: 'tropical,milkshake,fruit',    desc: 'Tropical fruit milkshake' },
-    { name: 'Passion Fruit Mojito',     price: 450, emoji: '🍹', img: '/Screenshot 2026-03-25 081440.png', badge: '🍹 Mocktail', desc: 'Fresh passion fruit mojito' },
+    { name: 'Passion Fruit Mojito',     price: 450, emoji: '🍹', img: '/derby-mojito.jpg', badge: '🍹 Mocktail', desc: 'Fresh passion fruit mojito' },
     { name: 'Cola Mojito',              price: 450, emoji: '🍹', img: 'cola,mojito,mint',              desc: 'Cola mojito' },
     { name: 'Blue Lagoon',              price: 450, emoji: '💙', img: 'blue,lagoon,mocktail',           desc: 'Blue lagoon mocktail' },
     { name: 'Sunset Mojito',            price: 450, emoji: '🌅', img: 'sunset,mojito,colorful',         desc: 'Sunset mojito' },
