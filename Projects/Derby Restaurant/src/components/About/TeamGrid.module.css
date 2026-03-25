@@ -1,0 +1,48 @@
+.section {
+  padding: 80px 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+.label {
+  display: inline-block;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.heading {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--cream);
+  margin-bottom: 48px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: fadeUp 0.7s ease both;
+}
+.photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(212,160,23,0.3);
+}
+.name {
+  color: var(--cream);
+  font-weight: 600;
+  font-size: 1rem;
+}
+.role {
+  color: var(--gold);
+  font-size: 0.85rem;
+}
