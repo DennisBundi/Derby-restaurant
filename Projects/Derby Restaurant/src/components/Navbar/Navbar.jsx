@@ -6,18 +6,20 @@ export default function Navbar({ cartCount, onCartToggle }) {
 
   return (
     <nav className={styles.nav}>
-      <Link to="/" className={styles.logo}>
-        <span className={styles.logoDerby}>Derby</span>
-        <span className={styles.logoRest}>Restaurant</span>
-      </Link>
-      <div className={styles.links}>
-        <Link to="/about" className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>
-          About
+      <div className={styles.inner}>
+        <Link to="/" className={styles.logo}>
+          <span className={styles.logoDerby}>Derby</span>
+          <span className={styles.logoRest}>Restaurant</span>
         </Link>
-        <a href="/#events" className={styles.navLink}>Events</a>
-        <button className={styles.cartBtn} onClick={onCartToggle}>
-          🛒 <span className={styles.badge}>{cartCount}</span>
-        </button>
+        <div className={styles.links}>
+          <Link to="/about" className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>
+            About
+          </Link>
+          <a href="/#events" className={styles.navLink}>Events</a>
+          <button className={styles.cartBtn} onClick={onCartToggle}>
+            🛒 <span className={styles.badge}>{cartCount}</span>
+          </button>
+        </div>
       </div>
     </nav>
   )
