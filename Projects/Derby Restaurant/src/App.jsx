@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import styles from './App.module.css'
 
 import Navbar  from './components/Navbar/Navbar'
@@ -8,6 +9,7 @@ import Menu    from './components/Menu/Menu'
 import Cart    from './components/Cart/Cart'
 import Footer  from './components/Footer/Footer'
 import Toast   from './components/Toast/Toast'
+import AboutPage from './pages/AboutPage'
 
 export default function App() {
   const [cart, setCart]           = useState([])
@@ -70,10 +72,17 @@ export default function App() {
   return (
     <div className={styles.app}>
       <Navbar cartCount={cartCount} onCartToggle={() => setCartOpen(o => !o)} />
-      <Hero />
-      <About />
-      <Menu activeTab={activeTab} onTabChange={setActiveTab} onAddToCart={addToCart} />
-      <Footer />
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Hero />
+            <About />
+            <Menu activeTab={activeTab} onTabChange={setActiveTab} onAddToCart={addToCart} />
+            <Footer />
+          </>
+        } />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
       <Cart
         cart={cart}
         isOpen={cartOpen}
