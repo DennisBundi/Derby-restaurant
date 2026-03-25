@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styles from './About.module.css'
 
 const PILLS = ['🕐 Open Daily', '🍽️ Dine In & Takeaway', '📦 Group Platters', '☕ Bar & Beverages']
@@ -14,6 +15,7 @@ export default function About() {
       <div className={styles.pills}>
         {PILLS.map(p => <span key={p} className={styles.pill}>{p}</span>)}
       </div>
+      <Link to="/about" className={styles.storyLink}>Read our full story →</Link>
     </section>
   )
 }
