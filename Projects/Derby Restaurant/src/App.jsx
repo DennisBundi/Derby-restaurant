@@ -6,6 +6,7 @@ import Navbar  from './components/Navbar/Navbar'
 import Hero    from './components/Hero/Hero'
 import About   from './components/About/About'
 import Menu    from './components/Menu/Menu'
+import Events  from './components/Events/Events'
 import Cart    from './components/Cart/Cart'
 import Footer  from './components/Footer/Footer'
 import Toast   from './components/Toast/Toast'
@@ -80,6 +81,7 @@ export default function App() {
             <Hero />
             <About />
             <Menu activeTab={activeTab} onTabChange={setActiveTab} onAddToCart={addToCart} />
+            <Events />
             <Footer />
           </>
         } />

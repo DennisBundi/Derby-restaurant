@@ -14,6 +14,7 @@ export default function Navbar({ cartCount, onCartToggle }) {
         <Link to="/about" className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>
           About
         </Link>
+        <a href="/#events" className={styles.navLink}>Events</a>
         <button className={styles.cartBtn} onClick={onCartToggle}>
           🛒 <span className={styles.badge}>{cartCount}</span>
         </button>

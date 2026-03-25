@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from './About.module.css'
 
-const PILLS = ['🕐 Open Daily', '🍽️ Dine In & Takeaway', '📦 Group Platters', '☕ Bar & Beverages']
+const PILLS = ['🕐 Open Daily', '🍽️ Dine In & Takeaway', '📦 Group Platters', '☕ Bar & Beverages', '🎉 Private Events', '🌿 Outdoor Events']
 
 export default function About() {
   return (
