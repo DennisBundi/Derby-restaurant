@@ -49,7 +49,7 @@ export default function App() {
 
   const clearCart = useCallback(() => setCart([]), [])
 
-  const sendWhatsApp = useCallback((notes) => {
+  const sendWhatsApp = useCallback((notes, name, phone) => {
     if (cart.length === 0) return
     const lines = cart.map(item => {
       const priceStr = item.askPrice ? '(price TBC)' : `Ksh ${(item.price * item.qty).toLocaleString()}`
@@ -58,7 +58,9 @@ export default function App() {
     const subtotal = cart.filter(i => !i.askPrice).reduce((s, i) => s + i.price * i.qty, 0)
     const hasTBC   = cart.some(i => i.askPrice)
 
-    let msg = `🍽️ *NEW ORDER — Derby Restaurant*\n\n📋 *Order Details:*\n${lines.join('\n')}\n\n`
+    let msg = `🍽️ *NEW ORDER — Derby Restaurant*\n\n`
+    msg += `👤 *Customer:* ${name}\n📱 *Phone:* ${phone}\n\n`
+    msg += `📋 *Order Details:*\n${lines.join('\n')}\n\n`
     msg += `💰 *Subtotal: Ksh ${subtotal.toLocaleString()}*\n`
     if (hasTBC) msg += `_(Prices TBC items to be confirmed by restaurant)_\n`
     if (notes)  msg += `\n📝 *Notes:* ${notes}\n`

@@ -1,15 +1,23 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import styles from './Cart.module.css'
 import CartItem from './CartItem'
+import OrderModal from './OrderModal'
 
 export default function Cart({ cart, isOpen, onClose, onUpdateQty, onClearCart, onSendWhatsApp }) {
-  const notesRef = useRef(null)
+  const notesRef    = useRef(null)
+  const [showModal, setShowModal] = useState(false)
 
   const subtotal = cart.filter(i => !i.askPrice).reduce((s, i) => s + i.price * i.qty, 0)
   const hasTBC   = cart.some(i => i.askPrice)
 
-  function handleSend() {
-    onSendWhatsApp(notesRef.current?.value || '')
+  function handleSendClick() {
+    if (cart.length === 0) return
+    setShowModal(true)
+  }
+
+  function handleModalConfirm(name, phone) {
+    setShowModal(false)
+    onSendWhatsApp(notesRef.current?.value || '', name, phone)
   }
 
   return (
@@ -50,12 +58,21 @@ export default function Cart({ cart, isOpen, onClose, onUpdateQty, onClearCart, 
           <button
             className={styles.waBtn}
             disabled={cart.length === 0}
-            onClick={handleSend}
+            onClick={handleSendClick}
           >
             📲 Order via WhatsApp
           </button>
         </div>
       </aside>
+
+      {showModal && (
+        <OrderModal
+          cart={cart}
+          notes={notesRef.current?.value || ''}
+          onConfirm={handleModalConfirm}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </>
   )
 }
